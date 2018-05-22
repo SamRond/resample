@@ -7,12 +7,12 @@ class Filter
   attr_reader :half_window, :rolloff, :precision
   FILTERS = {
     'kaiser_fast': {
-      datafile: './data/kaiser_fast.bin',
+      datafile: '/data/kaiser_fast.bin',
       rolloff: 0.85,
       precision: 512
     },
     'kaiser_best': {
-      datafile: './data/kaiser_best.bin',
+      datafile: '/data/kaiser_best.bin',
       rolloff: 0.9475937167399596,
       precision: 512
     }
@@ -25,7 +25,7 @@ class Filter
 
   def load_filter(name)
     filter = FILTERS[name.to_sym]
-    @datafile = File.expand_path(filter[:datafile])
+    @datafile = filter[:datafile]
     @rolloff = filter[:rolloff]
     @precision = filter[:precision]
   end
