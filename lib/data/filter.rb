@@ -25,7 +25,7 @@ class Filter
 
   def load_filter(name)
     filter = FILTERS[name.to_sym]
-    @datafile = filter[:datafile]
+    @datafile = File.dirname(__FILE__) + filter[:datafile]
     @rolloff = filter[:rolloff]
     @precision = filter[:precision]
   end
