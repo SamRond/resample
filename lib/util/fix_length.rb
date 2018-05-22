@@ -18,7 +18,7 @@ module Util
       data = audio
 
       if n > size
-        data = data[a...size]
+        data = data[0...size]
       elsif n < size
         padding = Array.new(size - n, data[-1])
         data = data.concat(padding)
