@@ -5,7 +5,6 @@ require 'data/filter'
 require 'util/audio'
 require 'util/fix_length'
 require 'core_extensions/array'
-require 'bigdecimal'
 
 require 'byebug'
 ###
@@ -60,7 +59,7 @@ module Resample
     resample_f(audio, out, ratio, window, delta, filter.precision)
 
     # calculate proportional number of samples for fix
-    # Util::FixLength.fix(out, length) if fix
+    Util::FixLength.fix(out, length) if fix
   end
 
   def resample_f(x, y, sample_ratio, interp_win, interp_delta, num_table)
@@ -155,7 +154,7 @@ module Resample
   #   True if the audio is monophonics
   ###
   def detect_mono(audio_in)
-    (audio_in[0].is_a? Float) || (audio_in[0].is_a? BigDecimal)
+    audio_in[0].is_a? Float
   end
 
   ###
@@ -201,7 +200,7 @@ module Resample
   ###
   def get_delta(window)
     delta = window.each_cons(2).map { |a, b| b - a }
-    delta.push(BigDecimal(0))
+    delta.push(0.0)
 
     delta
   end

@@ -29,4 +29,16 @@ class Filter
     @rolloff = filter[:rolloff]
     @precision = filter[:precision]
   end
+
+  def self.dump(path)
+    data = ''
+    f = File.open(path, 'r')
+    f.each_line do |line|
+      data += line
+    end
+
+    data = data.gsub(/\s+/m, ' ').strip.split(' ')
+    data = data.map(&:to_f)
+    File.open('./data/kaiser_best.bin', 'wb') { |b| b.write(Marshal.dump(data)) }
+  end
 end

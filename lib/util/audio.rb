@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'bigdecimal'
-
 module Util
   ###
   # Utility class for manipulating audio data
@@ -21,12 +19,12 @@ module Util
         (len > 2) && (valid_format? sample)
       end
 
-      # Is the data either Float, BigDecimal, or array that includes those
+      # Is the data either Float or array that includes floats
       def valid_format?(data)
         if data.is_a? Array
           (valid_format? data[0]) && (valid_format? data[1])
         else
-          (data.is_a? Float) || (data.is_a? BigDecimal)
+          data.is_a? Float
         end
       end
     end
